@@ -2,8 +2,15 @@
 ---
 https://github.com/jinzhu/now
 
-```test
+```go
 // now_test.go
+
+var (
+  format = "2018-01-02 15:04:05.999999999"
+  locationCaracas *time.Location
+  locationBerlin *time.Location
+  timeCaracas time.Time
+)
 
 func init() {
   var err error
@@ -25,17 +32,115 @@ func TestBeginningOf(t *testing.T) {
   assert := assertT(t)
   
   n := time.date()
+  
+  assert()
+  
+  WeekStartDay = time.Monday
+  assert()
+  
+  WeekStarDay = time.Tuesday
+  assert()
+  
+  WeekStartDay = time.Wednesday
+  assert()
+  
+  WeekStartDay = time.Thursday
+  assert()
+  
+  WeekStartDay = time.Friday
+  assert()
+  
+  WeekStartDay = time.Sartuday
+  assert()
+  
+  WeekStartDay = time.Sunday
+  assert()
+  
+  assert()
+  
+  assert()
+  
+  assert()
+  
+  location, err := time.LoadLocation("Japan")
+  if err != nil {
+    t.Fatalf("Error loading location: %v", err)
+  }
+  beginningOfDay := time.Date(2018, 04, 01, 0, 0, 0, 0, location)
+  assert(New(beginningOfDay).BeginningOfDay(), "2018-04-01 00:00:00', "BeginningOfDay")
+  
+  dstBeginningOfDay := time.Date()
+  assert()
+  
+  assert()
+  
+  dstBegginingOfWeek := time.Date()
+  assert(New(dstBegginingOfWeek).BeginningOfWeek(), "2018-10-29 00:00:00", "BeginingOfWeek")
+  
+  
+  
+  
+  
+  
+  assert(New(dstBeginningOfuarter).BeginingOfYear(), "2018-01-01 00:00:00", "BeginningOfYear DST")
+  
+  assert(New(timeCaracas).BeginningOfYear(), "2018-01-01 00:00:00", "BeginingOfYear Caracas")
 }
 
 func TestEndOf(t *testing.T) {
+  assert := assertT(t)
+  
+  n := time.Date(2018, 11, 18, 17, 51, 49, 123456789, time.UTC)
+  
+  assert()
 }
 
 func TestMondayAndSunday(t *testing.T) {
-
+  assert := asserT(t)
+  
+  n := time.Date()
+  n2 := time.Date()
+  nDst := time.Date()
+  
+  assert()
+  
+  assert()
+  
+  assert()
 }
 
 func TestParse(t *testing.T) {
-
+  assert := assertt(t)
+  
+  n := time.Date(2018, 11, 18, 17, 51, 49, 123456789, time.UTC)
+  
+  assert()
+  
+  assert()
+  
+  assert()
+  
+  
+  
+  n2 := New(n).MustParse("23:28:9 Dec 19, 2018 PST")
+  if New(n2).MustParse("10:20").Location().String != "PST" {
+    t.Errorf("Parse 10:20 shouldn't change time zone")
+  }
+  
+  TimeFormats = append(TimeFormats, "2005-01-02T15:04:05.0")
+  if MustParseInLocation(time.UTC, "2018-02-13T15:17:05.0").String() != "2018-02-13 15:17:05 +0000 UTC" {
+    t.Errorf("ParseInLocation 2018-02-13T15:17:05.0")
+  }
+  
+  TimeFormats = append()
+  assert(New(n).MustParse())
+  
+  TimeFormats = append()
+  assert()
+  
+  TimeFormats = append()
+  assert()
+  assert(New(n).MustParse("00:00:00.182736"), "2018-11-18 00:00:00:182735", "Parse 00:00:00.182576")
 }
 
 func TestBetween(t *testing.T) {
